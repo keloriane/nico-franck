@@ -1,7 +1,5 @@
-import Container from "@/components/common/Col";
-import Col from "@/components/common/Container";
+"use client";
 import Hero from "@/components/Sections/Hero";
-import Image from "next/image";
 
 import { Darker_Grotesque, Inter } from "next/font/google";
 import { twMerge } from "tailwind-merge";
