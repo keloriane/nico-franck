@@ -4,7 +4,7 @@ import Container from "../common/Col";
 
 const About = () => {
   return (
-    <Container className="sm:pt-50px md:pt-[328px] xl:pt-[228px] xl:pb-[330px] md:pb-[230px] xs:pb-[50px]">
+    <Container className="w-[90vw] m-auto sm:pt-50px md:pt-[328px] xl:pt-[228px] md:pb-[130px] xs:pb-[50px]">
       <Col colStart={[2, 2, 3, 3]} colEnd={[26, 26, 25, 25]}>
         <h3 className="text-accent sm:text-2xl md:text-[42px] font-serif font-semibold">
           Nicolas Franck

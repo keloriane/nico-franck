@@ -9,6 +9,7 @@ import karolina from "@/../public/images/karolina.jpg";
 import Image from "next/image";
 import { gsap } from "gsap";
 import styles from "@/styles/hero.module.css";
+import TextAnimation from "../common/TextAnimation";
 
 const Hero = () => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
@@ -16,68 +17,34 @@ const Hero = () => {
   const imageItemRefs = useRef<HTMLImageElement[]>([]);
 
   useEffect(() => {
-    const h2Element = h2Ref.current;
+    // GSAP animations for image wrappers and items
+    imageWrapperRefs.current.forEach((wrapper, index) => {
+      const image = imageItemRefs.current[index];
 
-    if (h2Element?.textContent) {
-      // Split the text into words and wrap each in a span
-      const words = h2Element.textContent.split(" ");
-      h2Element.innerHTML = words
-        .map(
-          (word) =>
-            `<span class="overflow-hidden inline-block"><span class="inline-block">${word}</span></span>`
-        )
-        .join(" ");
-
-      // Select all inner spans for animation
-      const spans = h2Element.querySelectorAll("span > span");
-
-      gsap.set(spans, { opacity: 0 });
-
-      // GSAP animation for text
-      gsap.fromTo(
-        spans,
-        {
-          y: 50,
-        },
-        {
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
+      if (wrapper && image) {
+        // Animate the wrapper
+        gsap.to(wrapper, {
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          duration: 2,
+          ease: "expo.out",
           delay: 0.5,
-          y: 0,
-          ease: "power3.out",
-        }
-      );
+        });
 
-      // GSAP animations for image wrappers and items
-      imageWrapperRefs.current.forEach((wrapper, index) => {
-        const image = imageItemRefs.current[index];
-
-        if (wrapper && image) {
-          // Animate the wrapper
-          gsap.to(wrapper, {
-            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        // Animate the image inside the wrapper
+        gsap.fromTo(
+          image,
+          {
+            scale: 1.5,
+          },
+          {
+            scale: 1,
             duration: 2,
+            delay: 0.4,
             ease: "expo.out",
-            delay: 0.5,
-          });
-
-          // Animate the image inside the wrapper
-          gsap.fromTo(
-            image,
-            {
-              scale: 1.5,
-            },
-            {
-              scale: 1,
-              duration: 2,
-              delay: 0.4,
-              ease: "expo.out",
-            }
-          );
-        }
-      });
-    }
+          }
+        );
+      }
+    });
   }, []);
 
   // Helper function to set refs in the array
@@ -94,14 +61,12 @@ const Hero = () => {
     >
       <Container className="flex items-center">
         <Col colStart={[2, 2, 2, 2]} colEnd={[27, 27, 14, 14]}>
-          <h2
-            ref={h2Ref}
-            className={twMerge(
-              "text-[3rem] sm:text-2xl md:text-2xl lg:text-3xl font-serif leading-[100%]"
-            )}
-          >
-            COACH BIEN ÊTRE NUTRITION ET SPORT
-          </h2>
+          <TextAnimation
+            text="COACH BIEN ÊTRE NUTRITION ET SPORT"
+            splitType="word"
+            className="text-[3rem] sm:text-2xl md:text-2xl lg:text-3xl font-serif leading-[100%]"
+            as={"h3"}
+          />
 
           <Link
             href={"#"}

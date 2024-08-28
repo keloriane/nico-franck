@@ -32,8 +32,8 @@ const process = [
 
 const Process = () => {
   return (
-    <div className=" mb-[200px] mt-[200px] min-h-[80vh]  w-[95%] m-auto relative">
-      <div className="grid  sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 sm:grid-rows-4 md:grid-rows-4 xl:grid-rows-2 items-start justify-center gap-[100px]">
+    <div className=" mb-[80px] mt-[200px] min-h-[80vh]  w-[95%] m-auto relative">
+      <div className="grid  sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 sm:grid-rows-4 md:grid-rows-2 xl:grid-rows-2 items-start justify-center gap-[100px]">
         {process.map((item, index) => (
           <Card
             key={index}
@@ -43,13 +43,12 @@ const Process = () => {
           />
         ))}
       </div>
-      <div className="w-[1200px] h-full absolute top-0 left-[15%]">
+      <div className="w-full max-w-[1200px] h-full absolute top-0 left-[15%]">
         <Image
           src={circles.src}
           alt="Circles"
           className="absolute bottom-0 left-1"
-          width={1200}
-          height={1045}
+          fill
         />
       </div>
     </div>

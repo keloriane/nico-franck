@@ -8,6 +8,8 @@ import Process from "@/components/Sections/Process";
 import Marquee from "@/components/Sections/Marquee";
 import FAQ from "@/components/Sections/FAQ";
 import Testimonial from "@/components/Sections/Testimonial";
+import Contact from "@/components/Sections/Contact";
+import Menu from "@/components/Sections/Menu";
 
 const grotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -30,12 +32,14 @@ export default function Home() {
         grotesque.variable
       )}
     >
+      <Menu />
       <Hero />
       <About />
       <Marquee />
       <Process />
       <FAQ />
       <Testimonial />
+      <Contact />
     </main>
   );
 }
