@@ -10,6 +10,7 @@ import FAQ from "@/components/Sections/FAQ";
 import Testimonial from "@/components/Sections/Testimonial";
 import Contact from "@/components/Sections/Contact";
 import Menu from "@/components/Sections/Menu";
+import Slider from "@/components/common/Slider";
 
 const grotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function Home() {
       <Process />
       <FAQ />
       <Testimonial />
+
       <Contact />
     </main>
   );

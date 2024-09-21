@@ -21,9 +21,9 @@ const Menu = () => {
           <path
             d="M30.1807 17.5563H37.8554"
             stroke="#FCD4B7"
-            stroke-width="5.09"
+            strokeWidth="5.09"
           />
-          <path d="M29 3.38757H49.6627" stroke="#FCD4B7" stroke-width="5.09" />
+          <path d="M29 3.38757H49.6627" stroke="#FCD4B7" strokeWidth="5.09" />
         </svg>
       </div>
       <ul

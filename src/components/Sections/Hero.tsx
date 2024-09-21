@@ -47,7 +47,6 @@ const Hero = () => {
     });
   }, []);
 
-  // Helper function to set refs in the array
   const addToRefs = (refArray: any, el: any) => {
     if (el && !refArray.current.includes(el)) {
       refArray.current.push(el);
