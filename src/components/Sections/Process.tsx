@@ -43,14 +43,14 @@ const Process = () => {
           />
         ))}
       </div>
-      <div className="w-full max-w-[1200px] h-full absolute top-0 left-[15%]">
+      {/* <div className="w-full max-w-[1200px] h-full absolute top-0 left-[15%]">
         <Image
           src={circles.src}
           alt="Circles"
           className="absolute bottom-0 left-1"
           fill
         />
-      </div>
+      </div> */}
     </div>
   );
 };

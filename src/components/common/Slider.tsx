@@ -11,19 +11,7 @@ import Image6 from "@/../public/images/fruits.png";
 gsap.registerPlugin(Draggable);
 
 const ParallaxSlider = () => {
-  const imagesArray = [
-    Image1,
-    Image2,
-    Image3,
-    Image4,
-    Image5,
-    Image6,
-    Image2,
-    Image3,
-    Image4,
-    Image5,
-    Image6,
-  ];
+  const imagesArray = [Image1, Image2, Image3, Image4, Image5, Image6];
   const slidesRef = useRef<HTMLDivElement>(null);
   const currentXRef = useRef(0);
   const parallaxRef = useRef<any[]>([]);
@@ -89,8 +77,8 @@ const ParallaxSlider = () => {
 
       gsap.set(img, {
         position: "absolute",
-        left: -10,
-        scale: 2,
+        left: -50,
+        scale: 1.4,
         attr: { src: image.src },
       });
 
@@ -103,7 +91,6 @@ const ParallaxSlider = () => {
 
     parallaxRef.current = parallax;
 
-    // Use requestAnimationFrame instead of setTimeout for smoother animation
     const rafUpdateParallax = () => {
       requestAnimationFrame(updateParallax);
     };
@@ -112,14 +99,14 @@ const ParallaxSlider = () => {
       type: "x",
       bounds: { left: window.innerWidth / 2, width: 1 },
       zIndexBoost: false,
-      onDrag: rafUpdateParallax, // Use requestAnimationFrame for smoother updates
+      onDrag: rafUpdateParallax,
       inertia: true,
-      throwResistance: 800, // Lower resistance for smoother throw
-      onThrowUpdate: rafUpdateParallax, // requestAnimationFrame for throw updates
+      throwResistance: 800,
+      onThrowUpdate: rafUpdateParallax,
       onDragEnd: function () {
         handleInfiniteLoop(this);
+        handleSwipeToSlide(this);
       },
-      //@ts-ignore
       snap: snapRef.current,
       onRelease: function () {
         currentXRef.current = this.endX;
@@ -146,6 +133,31 @@ const ParallaxSlider = () => {
     };
   }, [n]);
 
+  // Handle swipe behavior to move to next or previous slide
+  const handleSwipeToSlide = (dragInstance: any) => {
+    const velocityX = dragInstance.getVelocity("x");
+
+    // Check if the swipe is strong enough to trigger the next/prev slide
+    if (velocityX < -500) {
+      // Swipe to the left, go to next slide
+      handleButtonClick("next");
+    } else if (velocityX > 500) {
+      // Swipe to the right, go to previous slide
+      handleButtonClick("prev");
+    } else {
+      // If not strong enough, snap back to the nearest slide
+      const snappedX = snapRef.current(dragInstance.endX);
+      gsap.to(slidesRef.current, {
+        x: snappedX,
+        duration: 0.8,
+        ease: "power3.out",
+        onUpdate: updateParallax,
+        overwrite: true,
+      });
+      currentXRef.current = snappedX;
+    }
+  };
+
   const handleButtonClick = (direction: "prev" | "next") => {
     const nextX = currentXRef.current + (direction === "next" ? -450 : 450);
     const snappedX = snapRef.current(nextX);
@@ -153,8 +165,8 @@ const ParallaxSlider = () => {
     if (snappedX !== currentXRef.current) {
       gsap.to(slidesRef.current, {
         x: snappedX,
-        duration: 0.8, // Make the transition longer for smoother effect
-        ease: "power3.out", // Apply a smooth easing effect
+        duration: 0.8,
+        ease: "power3.out",
         onUpdate: updateParallax,
         overwrite: true,
       });
