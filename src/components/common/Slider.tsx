@@ -107,6 +107,7 @@ const ParallaxSlider = () => {
         handleInfiniteLoop(this);
         handleSwipeToSlide(this);
       },
+      //@ts-ignore
       snap: snapRef.current,
       onRelease: function () {
         currentXRef.current = this.endX;
